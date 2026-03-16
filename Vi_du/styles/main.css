@@ -410,7 +410,7 @@ button i {
     flex-direction: column;
     border: 10px solid black;
     border-radius: 4px;
-    width: 70px;
+    width: 70%;
     padding: 10px;
     margin: auto;
 }

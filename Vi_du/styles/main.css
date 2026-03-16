@@ -404,3 +404,13 @@ button:hover {
 button i {
     margin-right: 5px;
 }
+
+.khung {
+    display: flex;
+    flex-direction: column;
+    border: 10px solid black;
+    border-radius: 4px;
+    width: 70px;
+    padding: 10px;
+    margin: auto;
+}

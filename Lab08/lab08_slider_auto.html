@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab08_slider_auto</title>
+  <style>
+    img { vertical-align: middle; }
+
+    .slideshow-container {
+      max-width: 800px;
+      position: relative;
+      margin: auto;
+      border: 4px solid black;
+      background-color: white;
+    }
+
+    .mySlides {
+      display: none;
+      animation: fade 1s;
+    }
+
+    @keyframes fade {
+      from {opacity: 0.4} 
+      to {opacity: 1}
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      padding: 16px;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 3px;
+      background-color: rgba(0,0,0,0.4);
+      user-select: none;
+      transition: 0.3s;
+    }
+
+    .prev { left: 0; }
+    .next { right: 0; }
+
+    .prev:hover, .next:hover { background-color: rgba(0,0,0,0.8); }
+
+    .dot {
+      display: inline-block;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      background-color: #999;
+      cursor: pointer;
+      margin: 0 3px;
+    }
+
+    .dot.active, .dot:hover { background-color: #555; }
+
+  </style>
+</head>
+<body>
+
+<div class="slideshow-container">
+  <div class="mySlides"><img src="img/slide_1.jpeg" style="width:100%"></div>
+  <div class="mySlides"><img src="img/slide_2.jpg" style="width:100%"></div>
+  <div class="mySlides"><img src="img/slide_3.jpg" style="width:100%"></div>
+  <div class="mySlides"><img src="img/slide_4.jpg" style="width:100%"></div>
+  <div class="mySlides"><img src="img/slide_5.jpg" style="width:100%"></div>
+
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+<div style="text-align:center; margin-top:10px;">
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+  <span class="dot" onclick="currentSlide(4)"></span>
+  <span class="dot" onclick="currentSlide(5)"></span>
+</div>
+
+<script>
+let slideIndex = 0;
+showSlides();
+
+function plusSlides(n) {
+  slideIndex += n;
+  showSlides();
+}
+
+function currentSlide(n) {
+  slideIndex = n - 1;
+  showSlides();
+}
+
+function showSlides() {
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+  for (let i = 0; i < dots.length; i++) { dots[i].className = dots[i].className.replace(" active", ""); }
+  if (slideIndex >= slides.length) slideIndex = 0;
+  if (slideIndex < 0) slideIndex = slides.length - 1;
+  slides[slideIndex].style.display = "block";
+  dots[slideIndex].className += " active";
+}
+
+setInterval(() => { plusSlides(1); }, 2000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài tập 3a - Đặt phòng khách sạn</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            display: inline-block;
+            width: 120px;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: 100px;
+        }
+        .service input {
+            margin-right: 5px;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h3>Bài tập 3a</h3>
+    <label>Loại phòng:</label>
+    <input type="radio" name="room" value="500" checked> A (500 usd)
+    <input type="radio" name="room" value="300"> B (300 usd)
+    <input type="radio" name="room" value="200"> C (200 usd)
+    <br><br>
+
+    <label>Ngày đến:</label>
+    <input type="date" id="checkin">
+    <br>
+    <label>Ngày đi:</label>
+    <input type="date" id="checkout">
+    <br><br>
+
+    <label>Dịch vụ:</label>
+    <span class="service">
+        <input type="checkbox" value="5" id="laundry"> Giặt ủi (5 usd)
+        <input type="checkbox" value="20" id="car"> Thuê xe (20 usd)
+        <input type="checkbox" value="10" id="spa"> Spa (10 usd)
+    </span>
+    <br><br>
+
+    <button onclick="calculateTotal()">Tổng tiền:</button>
+    <input type="text" id="total" readonly>
+
+    <script>
+        function calculateTotal() {
+
+            const rooms = document.getElementsByName('room');
+            let roomPrice = 0;
+            for (let r of rooms) {
+                if (r.checked) {
+                    roomPrice = parseFloat(r.value);
+                    break;
+                }
+            }
+
+            const checkin = new Date(document.getElementById('checkin').value);
+            const checkout = new Date(document.getElementById('checkout').value);
+            let days = 1;
+            if (!isNaN(checkin) && !isNaN(checkout)) {
+                const timeDiff = checkout - checkin;
+                days = Math.floor(timeDiff / (1000 * 60 * 60 * 24)) + 1;
+                if (days < 1) days = 1; 
+            }
+
+            let servicePrice = 0;
+            const services = ['laundry','car','spa'];
+            for (let s of services) {
+                if (document.getElementById(s).checked) {
+                    servicePrice += parseFloat(document.getElementById(s).value);
+                }
+            }
+
+            const total = (roomPrice * days) + servicePrice;
+
+            document.getElementById('total').value = total + " USD";
+        }
+    </script>
+</body>
+</html>
